@@ -13,7 +13,6 @@
 
 require_once('utility.php');
 
-
 //estracting text information from albo pretorio of "vallata" cities
 function parsing_albo_vallata($url) {
 
@@ -22,8 +21,7 @@ function parsing_albo_vallata($url) {
 	$dom->loadHTML($html);
 	$xpath = new DOMXPath($dom);
  
-//XPath Query
-	
+	//XPath Query
 	$my_xpath_query = "//p";
 	$res1 = $xpath->query($my_xpath_query);
    	
@@ -32,27 +30,41 @@ function parsing_albo_vallata($url) {
 
 foreach($res1 as $span1)
    {
-     $string = $span1->nodeValue;
- 	 $string = str_do_better($string);
+     	$string = $span1->nodeValue;
+ 	 	$string = str_do_better($string);
     }
+    
 foreach($res2 as $span2)
    {
-     $links[] = "http://194.243.23.67:8080/albopretorio/" .$span2->nodeValue;
-    }    
+     	$links[] = "http://194.243.23.67:8080/albopretorio/" .$span2->nodeValue;
+	}    
 	
-$string_arr = explode(":", $string);
-unset($string_arr[0]);
+	//divido in items
+	$string_arr = explode("Numero: ", $string);
 
-$string_arr_items=array_chunk($string_arr, 5);
+	unset($string_arr[0]);
+	//rimuovo i tags
+	$string_arr=str_replace("Tipo:", ";",$string_arr);
+	$string_arr=str_replace("Data pubblicazione:", ";",$string_arr);
+	$string_arr=str_replace("Data scadenza:", ";",$string_arr);	
+	$string_arr=str_replace("Area di Riferimento:", ";",$string_arr);
+	$string_arr=str_replace("Oggetto:", ";",$string_arr);
+	$string_arr=str_replace("Numero:", ";",$string_arr);
+	$string_arr=str_replace("Documento", "",$string_arr);		
 
-for($i=0, $size = count($string_arr_items); $i<=$size; $i++) {
-	$string_arr_items[$i]=format_item($string_arr_items[$i]);
-	echo $i;
-}
-print_r($string_arr_items);
+for($i = 1; $i <=count($string_arr); $i++)
+	{
+		$data[$i-1]=explode(";", $string_arr[$i]);
+	}
 
-//LINKS
-print_r($links);
+	//DATA
+	//print_r($data);
+
+	//LINKS
+	//print_r($links);
+	
+	//print_r(array($data, $links));
+	return array($data, $links);
 
 }
 
@@ -64,13 +76,5 @@ function str_do_better($string)
 	return $string;
 }
 
-function format_item($array)
-{
-	$item[0]=str_replace("    Tipo", "",$array[0]);
-	$item[1]=str_replace("    Data pubblicazione", "",$array[1]);
-	$item[2]=str_replace("    Data scadenza", "",$array[2]);
-	$item[3]=str_replace("Oggetto", "",$array[3]);
-	$item[4]=str_replace("Documento Numero", "",$array[4]);
-	return $item;
-}
+
 

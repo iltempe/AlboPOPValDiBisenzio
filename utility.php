@@ -20,3 +20,12 @@ function get_string_between($string, $start, $end){
     $len = strpos($string,$end,$ini) - $ini;
     return substr($string,$ini,$len);
 }
+
+//from dd/mm/YYYY string to RSS pubDate
+function string2dataRSS($datestring)
+{
+		$datestring=str_replace("/", "-",$datestring);
+		$datestring=strtotime($datestring);
+		$pubDate=date('r',$datestring);
+		return $pubDate;
+}

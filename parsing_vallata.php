@@ -51,6 +51,7 @@ foreach($res2 as $span2)
 	$string_arr=str_replace("Oggetto:", ";",$string_arr);
 	$string_arr=str_replace("Numero:", ";",$string_arr);
 	$string_arr=str_replace("Documento", "",$string_arr);		
+	$string_arr = str_replace("\xc2\xa0", "", $string_arr);
 
 for($i = 1; $i <=count($string_arr); $i++)
 	{
@@ -63,7 +64,7 @@ for($i = 1; $i <=count($string_arr); $i++)
 	//LINKS
 	//print_r($links);
 	
-	//print_r(array($data, $links));
+	print_r(array($data, $links));
 	return array($data, $links);
 
 }

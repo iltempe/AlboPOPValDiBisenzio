@@ -16,7 +16,7 @@ require_once('utility.php');
 //estracting text information from albo pretorio of "vallata" cities
 function parsing_albo_vallata($url) {
 
- 	$html= curl_manage($url);
+ 	$html= file_get_contents($url);
 	$dom = new DOMDocument();
 	$dom->loadHTML($html);
 	$xpath = new DOMXPath($dom);

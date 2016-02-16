@@ -17,6 +17,8 @@ require_once('utility.php');
 function parsing_albo_vallata($url) {
 
  	$html= file_get_contents($url);
+ 	//$html= parse_url($url);
+ 	
 	$dom = new DOMDocument();
 	$dom->loadHTML($html);
 	$xpath = new DOMXPath($dom);

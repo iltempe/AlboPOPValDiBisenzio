@@ -49,3 +49,22 @@ function curl_manage($url)
 		return $data;
 }
 
+//migliora blocchi di testo
+function text_do_better($string)
+{
+    $string = preg_replace('/^[ \t]*[\r\n]+/m', '', $string);
+	$string = str_replace("\n", "", $string);
+	$string = str_replace("\r", "", $string);
+	return $string;
+}
+
+//migliora links togliendo tail
+function link_do_better($link)
+{
+	$link = preg_replace('#([\w\d]+=[\w\d]{32})#',null,$link);
+	print_r($link);
+	return $link;
+}
+
+
+

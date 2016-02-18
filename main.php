@@ -34,7 +34,7 @@ function rss_build($comune) {
 //build the RSS feed
 $RB = new RSSBuilder();
 
-$file_rss=$comune."AlboPOP.xml";
+$file_rss=dirname(__FILE__). "/". $comune."AlboPOP.xml";
 $web_link="http://194.243.23.67:8080/albopretorio/albo". $comune.".php";
 
 		$parsed=parsing_albo_vallata($web_link);

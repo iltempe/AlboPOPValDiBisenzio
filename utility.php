@@ -66,5 +66,15 @@ function link_do_better($link)
 	return $link;
 }
 
+//aggiunge al feed rss la stringa per nascondere il tack
+function add_notrack_info($file)
+{
+	$line=4; //includes zero as 1.
+	$newdata='<xhtml:meta xmlns:xhtml="http://www.w3.org/1999/xhtml" name="robots" content="noindex" />';
+	$data=file($file);
+	$data[$line]=$newdata."\r".$data[$line];
+	$data=implode($data);
+	file_put_contents($file,$data);
+}
 
 

@@ -59,5 +59,8 @@ $web_link="http://194.243.23.67:8080/albopretorio/albo". $comune.".php";
 
 //echo $RB;
 file_put_contents($file_rss, $RB);
+//insert no track indications
+add_notrack_info($file_rss);
+
 
 }

@@ -1,4 +1,4 @@
-# AlboPOP
+# AlboPOPValDiBisenzio
 My personal contribution to Albo POP project (http://aborruso.github.io/albo-pop/)
 License MIT
 Developed by M.Tempestini
